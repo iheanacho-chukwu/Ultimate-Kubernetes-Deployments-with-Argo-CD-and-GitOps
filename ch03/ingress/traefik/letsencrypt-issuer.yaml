@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod # Name used to reference this issuer
+spec:
+  acme:  # ACME protocol configuration.
+    server: https://acme-v02.api.letsencrypt.org/directory # Let's Encrypt production API
+    email: nacho.chukwu@gmail.com  # Replace with your email
+    privateKeySecretRef:
+      name: letsencrypt-prod  # Stores Let's Encrypt account private key.
+    solvers:
+      - http01:  # Uses HTTP-01 challenge for domain validation.
+          ingress:
+            class: traefik # Integrates with Traefik Ingress Controller

@@ -1,0 +1,33 @@
+# nginx-application.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-dev
+  namespace: argocd  # Argo CD's namespace
+spec:
+  project: default
+  
+  # Source of the application manifests
+  source:
+    repoURL: https://charts.bitnami.com/bitnami # Helm repo, Can point to either a Helm chart repo or a git repo.
+    chart: nginx
+    targetRevision: 15.3.2  # Chart version
+
+    # helm specific config
+    helm:
+      releaseName: nginx
+      values: |
+        service:
+          type: ClusterIP
+        replicaCount: 1 
+  # Destination cluster and namespace to deploy the application
+  destination:
+  # cluster API URL
+    server: https://kubernetes.default.svc  # In default cluster
+    namespace: nginx-dev  # Target namespace
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true  # ← Critical option

@@ -53,7 +53,7 @@ app-of-apps-dev          app-of-apps-staging
 
 ## Git repository
 
-`https://github.com/iheanacho-chukwu/Ultimate-Kubernetes-Deployments-with-Argo-CD-and-GitOps.git` on **`main`**, under **`gitops-example/`**.
+`https://github.com/iheanacho-chukwu/Ultimate-Kubernetes-Deployments-with-Argo-CD-and-GitOps.git` on branch **`helm`** (all `Application` manifests use the same `targetRevision` so Argo clones one branch). If you later make **`main`** the source of truth, change every `targetRevision` in `gitops-example/argocd/**/*.yaml` to `main` and push.
 
 ## Bootstrap
 

@@ -18,7 +18,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/iheanacho-chukwu/Ultimate-Kubernetes-Deployments-with-Argo-CD-and-GitOps.git
-    targetRevision: main
+    targetRevision: helm
     path: gitops-example/argocd/apps/staging
     directory:
       include: "*.yaml"

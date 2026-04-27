@@ -1,5 +1,0 @@
-resources:
-  - kube-state-metrics.yaml
-  - observability-secret.yaml
-  - grafana-agent.yaml
-  - grafana-agent-logs.yaml

@@ -1,8 +1,6 @@
-# Book / sample content — always tracked (do not add rules that ignore these trees):
-#   ch03/
-#   ch04/
-#   gitops-example/
-# (This file only ignores OS/editor noise, local secrets, and a few artifact types.)
+gitops-master/
+helm-argocd/
+hello-world-argocd-aks/
 
 # --- OS ---
 .DS_Store

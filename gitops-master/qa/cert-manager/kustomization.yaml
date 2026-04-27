@@ -1,4 +1,0 @@
-resources:
-  - cert-manager.yaml
-  - lets-encrypt-issuer.yaml
-  - self-signed-issuer.yaml

@@ -1,3 +1,0 @@
-replicaCount: 2
-message: "Hello World — STAGING"
-environment: staging

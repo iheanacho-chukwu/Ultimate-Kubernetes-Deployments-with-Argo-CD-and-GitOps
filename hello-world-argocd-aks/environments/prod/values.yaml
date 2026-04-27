@@ -1,5 +1,0 @@
-# Production — single source of truth for this environment.
-replicaCount: 3
-
-message: "Hello World — PRODUCTION"
-environment: prod

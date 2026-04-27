@@ -1,4 +1,0 @@
-resources:
-  - nats-operator.yaml
-  - service-account.yaml
-  - service-role.yaml

@@ -1,8 +1,0 @@
-resources:
-  - https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.yaml
-  - self-signed-issuer.yaml
-  - lets-encrypt-gce-issuer.yaml
-  - sealed-cloudflare-secret.yaml
-
-patchesStrategicMerge:
-- overlay.yaml

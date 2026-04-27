@@ -1,5 +1,0 @@
-resources:
-  - falco.yaml
-  - falco-exporter.yaml
-  - grafana.yaml
-  - prometheus.yaml

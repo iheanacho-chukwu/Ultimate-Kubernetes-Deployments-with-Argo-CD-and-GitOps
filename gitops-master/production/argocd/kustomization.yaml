@@ -1,8 +1,0 @@
-resources:
-  - argocd.yaml
-  - namespace.yaml
-  # ingress-controller.yaml
-  - cert-manager.yaml
-  - nats.yaml
-  - sealed-secrets.yaml
-  - linkerd.yaml

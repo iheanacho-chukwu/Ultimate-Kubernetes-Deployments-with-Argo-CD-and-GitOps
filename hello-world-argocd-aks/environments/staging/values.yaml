@@ -1,5 +1,0 @@
-# Staging — single source of truth for this environment.
-replicaCount: 2
-
-message: "Hello World — STAGING"
-environment: staging

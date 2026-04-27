@@ -1,5 +1,0 @@
-resources:
-  - image-updater-git-ssh-creds-enc.yaml
-  - image-updater-token.yaml
-  - image-updater.yaml
-  - pull-secret-enc.yaml

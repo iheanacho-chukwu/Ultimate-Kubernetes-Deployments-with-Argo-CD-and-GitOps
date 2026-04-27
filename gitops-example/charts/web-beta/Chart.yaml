@@ -1,0 +1,6 @@
+apiVersion: v2
+name: web-beta
+description: Second simple demo app (nginx + static page) — reusable chart
+type: application
+version: 0.1.0
+appVersion: "1.27"

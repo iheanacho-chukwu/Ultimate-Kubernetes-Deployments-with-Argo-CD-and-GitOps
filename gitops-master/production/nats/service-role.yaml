@@ -1,0 +1,13 @@
+apiVersion: nats.io/v1alpha2
+kind: NatsServiceRole
+metadata:
+  name: nats-user # Must be the same as service-account name
+  namespace: apps
+  labels:
+    nats_cluster: nats
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  permissions:
+    publish: [">"]
+    subscribe: [">"]

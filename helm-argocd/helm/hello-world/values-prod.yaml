@@ -1,0 +1,3 @@
+replicaCount: 3
+message: "Hello World — PRODUCTION"
+environment: prod

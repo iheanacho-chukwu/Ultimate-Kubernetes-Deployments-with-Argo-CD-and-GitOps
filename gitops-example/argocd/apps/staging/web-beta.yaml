@@ -1,0 +1,29 @@
+# Child Application — STAGING — web-beta workload.
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gitops-example-web-beta-staging
+  namespace: argocd
+  labels:
+    gitops-example.io/environment: staging
+    gitops-example.io/app: web-beta
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/iheanacho-chukwu/Ultimate-Kubernetes-Deployments-with-Argo-CD-and-GitOps.git
+    targetRevision: helm
+    path: gitops-example/environments/staging/web-beta
+    kustomize:
+      buildOptions: --enable-helm --load-restrictor LoadRestrictionsNone
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: gitops-example-staging-web-beta
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true

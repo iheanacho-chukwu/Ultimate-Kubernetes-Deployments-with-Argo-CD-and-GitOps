@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nats
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://gitlab.com/deimosdev/client-project/optty/infrastructure/gitops.git
+    targetRevision: HEAD
+    path: staging/nats
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: apps
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    # syncOptions:
+    #   - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nats-staging
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://gitlab.com/deimosdev/client-project/optty/infrastructure/gitops.git
+    targetRevision: HEAD
+    path: staging/nats-staging
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: apps-staging
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    # syncOptions:
+    #   - CreateNamespace=true

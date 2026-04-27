@@ -1,0 +1,24 @@
+# Chart defaults only. Do not add values-dev.yaml / values-prod here —
+# per-environment overrides belong exclusively in environments/<env>/values.yaml
+
+replicaCount: 1
+
+image:
+  repository: nginx
+  tag: "1.27-alpine"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+message: "Hello World"
+environment: dev
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 32Mi
+  limits:
+    cpu: 100m
+    memory: 64Mi

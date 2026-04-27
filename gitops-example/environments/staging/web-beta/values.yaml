@@ -1,0 +1,6 @@
+# Staging overrides for web-beta (single source of truth for this app in staging).
+replicaCount: 2
+
+title: "Web Beta (staging)"
+message: "GitOps example — Beta (staging)"
+backgroundColor: "#ffe8cc"

@@ -1,0 +1,35 @@
+# Namespace used to deploy internal tools e.g Ingress
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: internal-system
+
+---
+# Namespace used to deploy client applications e.g merchant-api
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: apps
+  annotations:
+    #   linkerd.io/inject: enabled
+    config.linkerd.io/skip-outbound-ports: "4222,3306,6379"  #nats
+
+---
+# Namespace used to deploy client applications e.g merchant-api
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: apps-staging
+  annotations:
+    #   linkerd.io/inject: enabled
+    config.linkerd.io/skip-outbound-ports: "4222,3306,6379"  #nats
+
+---
+# Namespace used to deploy the load testing framework
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: load-testing
+  annotations:
+    #   linkerd.io/inject: enabled
+    config.linkerd.io/skip-outbound-ports: "8089,5557,5558"  #locust.io

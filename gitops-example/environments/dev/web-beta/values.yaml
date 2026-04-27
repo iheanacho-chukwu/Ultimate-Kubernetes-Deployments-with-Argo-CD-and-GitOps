@@ -1,0 +1,6 @@
+# Dev overrides for web-beta (single source of truth for this app in this env).
+replicaCount: 1
+
+title: "Web Beta (dev)"
+message: "GitOps example — Beta"
+backgroundColor: "#fff4e6"

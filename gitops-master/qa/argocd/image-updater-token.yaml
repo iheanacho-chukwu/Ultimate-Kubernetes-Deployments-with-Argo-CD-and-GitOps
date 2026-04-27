@@ -1,0 +1,16 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: argocd-image-updater-secret
+  namespace: argocd
+spec:
+  encryptedData:
+    argocd.token: AgBZgDLuEEE7eMlrfmG0d7M2t7qI27RWHz+sJ2pE55kiFSAYmr4Z8aCTjjrkJyW6UgUuRW1G3fqJVfOu5keEGz9+pmtEmUnFfSEqzkEC/zP8wjmpVB4S2NFt1+NPmtXcFQLzwOYNG53brcZj64XObknXWLcUyV3vAXi6PIYUmb2/9IlTiMhBA231kDzxtMOriJ3ECInaBD2XzxQvRHmQQvYoNPGEHGyd09GKEQje+VdrE/w9jB6zSEyncaDHTAFVisWCoF4GQu+zt4CnQQBRtb1Yu/ql8U3k4et8H+MotQTGabhcu9ThSzd82tHZq1TzLIm6zMuVAlf91ZlHqJedWgvrZZM0ZTGmt238biqazb/SiGBdcjylI2NwPH1HWYhyDgV8ZzfiZNLbwQURJkWEeNjmH4klDvj2IJgovpBbewoJ5EkPYtCcAW3C1hns9IfJdHPe6lGjvtsYqYuHGA6ZU+SWh16OU3Ut2ZB/m0VKK24MDfBWXYeUR3S7cj5yXotkVW9SmUXXR8/tikBvxut2s6KEFYyJZIeoXhOmyFyLqCfNIMW/GQMJ4RpNgxBi1R9t7nK8D23oeBUq8wMnwRehGicetpvx/SepKeyjvQS1OWaVo0HJLYbZFXGUn/f9KHfj49uKM81lrUAvq/PNvmVDBwcoBFH1t/ywLP2cz2D9lH/0hhTL9u7/LpyMjK+lVpsTofFKhqUm8qQxPghz9VmmJfiQbMvfBseSnITyBLVF+6vYIjgY6eZVZ1UQ4WRLnqDnXyanKQRDa5dyX9sfEaPy9BfWExg3QwGN7/eSTxkxM4/ReNsFql/3JIkXcefwwFSDDCbR0rNQzQggwzUItgmcYKYI7joKor0S16Wmh7OKP6FKRURiGHWO8vSwSOBhgSblhXj/FFseOn4SIgG4acPS369HKureLocMZNe0qx2K9fCIFFYwIfjck1p0Kn26X9nRfIR2rO5HCXzenVFnPc10qHmoigSnaXs6NUc=
+  template:
+    data: null
+    metadata:
+      creationTimestamp: null
+      name: argocd-image-updater-secret
+      namespace: argocd
+

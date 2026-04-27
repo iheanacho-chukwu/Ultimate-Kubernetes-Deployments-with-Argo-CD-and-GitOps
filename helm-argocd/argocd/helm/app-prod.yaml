@@ -1,0 +1,35 @@
+# Apply:  kubectl apply -n argocd -f argocd/helm/app-prod.yaml
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-world-helm-prod
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    environment: prod
+    approach: helm
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/YOUR_ORG/Ultimate-Kubernetes-Deployments-with-Argo-CD-and-GitOps.git
+    targetRevision: main
+    path: hello-world-argocd-aks/helm/hello-world
+
+    helm:
+      valueFiles:
+        - values.yaml
+        - values-prod.yaml          # replicas=3, message="... PRODUCTION"
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: hello-world-helm-prod
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true

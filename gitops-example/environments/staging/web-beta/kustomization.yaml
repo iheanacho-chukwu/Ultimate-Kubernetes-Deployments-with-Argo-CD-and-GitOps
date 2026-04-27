@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - namespace.yaml
+
+helmCharts:
+  - name: web-beta
+    releaseName: web-beta
+    repo: file://../../../charts/web-beta
+    version: 0.1.0
+    namespace: gitops-example-staging-web-beta
+    valuesFile: values.yaml

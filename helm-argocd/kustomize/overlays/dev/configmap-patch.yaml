@@ -1,0 +1,25 @@
+# Replaces the entire index.html in the base ConfigMap.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hello-world-html
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <title>Hello World — DEV</title>
+      <style>
+        body { font-family:sans-serif; text-align:center; padding-top:4rem;
+               background:#d4edda; }
+        .badge { background:#155724; color:#fff; padding:4px 12px;
+                 border-radius:4px; font-size:.85rem; font-weight:600; }
+      </style>
+    </head>
+    <body>
+      <h1>Hello World — DEV</h1>
+      <span class="badge">DEV</span>
+      <p style="margin-top:1rem;color:#555">1 replica &bull; AKS + Argo CD + Kustomize</p>
+    </body>
+    </html>

@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager-staging
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://gitlab.com/deimosdev/client-project/optty/infrastructure/gitops.git
+    targetRevision: HEAD
+    path: staging/cert-manager
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: internal-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - Validate=false # disables resource validation (equivalent to 'kubectl apply --validate=true')

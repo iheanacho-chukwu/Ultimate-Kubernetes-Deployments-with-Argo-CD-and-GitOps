@@ -1,0 +1,33 @@
+# App of Apps — STAGING only.
+# Syncs child Application manifests under argocd/apps/staging/ (nothing from dev).
+#
+# Bootstrap STAGING app-of-apps:
+#   kubectl apply -n argocd -f gitops-example/argocd/app-of-apps-staging.yaml
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gitops-example-app-of-apps-staging
+  namespace: argocd
+  labels:
+    gitops-example.io/environment: staging
+    app.kubernetes.io/component: app-of-apps
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/iheanacho-chukwu/Ultimate-Kubernetes-Deployments-with-Argo-CD-and-GitOps.git
+    targetRevision: main
+    path: gitops-example/argocd/apps/staging
+    directory:
+      include: "*.yaml"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true

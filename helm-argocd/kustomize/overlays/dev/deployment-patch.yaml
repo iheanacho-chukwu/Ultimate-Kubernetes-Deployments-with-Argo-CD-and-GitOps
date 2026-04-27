@@ -1,0 +1,7 @@
+# Strategic-merge patch: only fields listed here are changed; rest comes from base.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world
+spec:
+  replicas: 1   # dev: 1 pod is enough

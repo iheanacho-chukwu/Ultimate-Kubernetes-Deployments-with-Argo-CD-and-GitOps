@@ -1,0 +1,30 @@
+# Apply:  kubectl apply -n argocd -f argocd/kustomize/app-staging.yaml
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-world-kustomize-staging
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    environment: staging
+    approach: kustomize
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/YOUR_ORG/Ultimate-Kubernetes-Deployments-with-Argo-CD-and-GitOps.git
+    targetRevision: main
+    path: hello-world-argocd-aks/kustomize/overlays/staging
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: hello-world-staging
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true

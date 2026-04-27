@@ -1,0 +1,41 @@
+# Deploy hello-world to DEV using the Helm chart source.
+#
+# How it works:
+#   ArgoCD runs `helm template` with values.yaml + values-dev.yaml, then
+#   applies the rendered manifests to the hello-world-helm-dev namespace.
+#
+# Apply:  kubectl apply -n argocd -f argocd/helm/app-dev.yaml
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-world-helm-dev
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io   # deletes child resources when App is deleted
+  labels:
+    environment: dev
+    approach: helm
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/YOUR_ORG/Ultimate-Kubernetes-Deployments-with-Argo-CD-and-GitOps.git
+    targetRevision: main
+    path: hello-world-argocd-aks/helm/hello-world
+
+    helm:
+      valueFiles:
+        - values.yaml               # base defaults
+        - values-dev.yaml           # dev overrides (replicas=1, message="... DEV")
+
+  destination:
+    server: https://kubernetes.default.svc   # same cluster ArgoCD runs on
+    namespace: hello-world-helm-dev
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true        # ArgoCD creates the namespace if missing
+    automated:
+      prune: true                   # remove resources deleted from Git
+      selfHeal: true                # revert manual changes made in the cluster

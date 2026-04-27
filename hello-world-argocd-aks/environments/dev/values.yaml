@@ -1,0 +1,8 @@
+# Dev — single source of truth for this environment (Helm values only).
+replicaCount: 1
+
+image:
+  tag: "1.27-alpine"
+
+message: "Hello World — DEV"
+environment: dev

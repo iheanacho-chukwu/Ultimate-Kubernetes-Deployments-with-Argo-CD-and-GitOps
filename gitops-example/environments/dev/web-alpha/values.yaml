@@ -1,0 +1,6 @@
+# Dev overrides for web-alpha (single source of truth for this app in this env).
+replicaCount: 1
+
+title: "Web Alpha (dev)"
+message: "GitOps example — Alpha"
+backgroundColor: "#e7f5ff"

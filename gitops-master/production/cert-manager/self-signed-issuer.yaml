@@ -1,0 +1,9 @@
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: selfsigning
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true  
+spec:
+  selfSigned: {}

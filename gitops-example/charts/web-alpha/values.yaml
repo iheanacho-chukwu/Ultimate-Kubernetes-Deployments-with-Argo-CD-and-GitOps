@@ -1,0 +1,24 @@
+# Defaults only. Environment overrides live under environments/<env>/<app>/values.yaml
+
+replicaCount: 1
+
+image:
+  repository: nginx
+  tag: "1.27-alpine"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+title: "Web Alpha"
+message: "Hello from Alpha"
+backgroundColor: "#e7f5ff"
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 32Mi
+  limits:
+    cpu: 100m
+    memory: 64Mi

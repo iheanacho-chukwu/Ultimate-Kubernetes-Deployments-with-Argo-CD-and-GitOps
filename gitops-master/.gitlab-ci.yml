@@ -1,0 +1,24 @@
+variables:
+  SERVICE_NAME: merchant-api
+  CLIENT_NAME: optty
+
+default:
+  tags:
+    - optty-dev
+
+test:
+  script:
+    - | 
+      set -e
+      for directory in ./**/
+      do
+        if [[ -f $directory/kustomization.yaml ]]; then
+          echo "KUSTOMIZE: Building $directory"
+          kustomize build $directory > /dev/null
+        fi
+        if [[ -f $directory/Chart.yaml ]]; then
+          echo "HELM: Linting $directory"
+          helm lint $directory
+        fi
+      done
+  interruptible: true

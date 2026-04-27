@@ -1,0 +1,29 @@
+# Child Application — DEV — web-alpha workload.
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gitops-example-web-alpha-dev
+  namespace: argocd
+  labels:
+    gitops-example.io/environment: dev
+    gitops-example.io/app: web-alpha
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/iheanacho-chukwu/Ultimate-Kubernetes-Deployments-with-Argo-CD-and-GitOps.git
+    targetRevision: helm
+    path: gitops-example/environments/dev/web-alpha
+    kustomize:
+      buildOptions: --enable-helm --load-restrictor LoadRestrictionsNone
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: gitops-example-web-alpha
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true

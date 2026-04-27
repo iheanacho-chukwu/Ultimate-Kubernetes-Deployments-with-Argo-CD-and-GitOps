@@ -1,0 +1,36 @@
+# Deploy hello-world to DEV using Kustomize overlays.
+#
+# How it works:
+#   ArgoCD runs `kustomize build kustomize/overlays/dev`, which merges the
+#   base manifests with the dev patches, then applies the result to the cluster.
+#
+# Apply:  kubectl apply -n argocd -f argocd/kustomize/app-dev.yaml
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-world-kustomize-dev
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    environment: dev
+    approach: kustomize
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/YOUR_ORG/Ultimate-Kubernetes-Deployments-with-Argo-CD-and-GitOps.git
+    targetRevision: main
+    path: hello-world-argocd-aks/kustomize/overlays/dev
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: hello-world-dev     # must match overlay namespace field
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true

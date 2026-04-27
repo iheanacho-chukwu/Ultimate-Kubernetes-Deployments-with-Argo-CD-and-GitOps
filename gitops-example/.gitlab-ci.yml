@@ -1,0 +1,29 @@
+# Optional CI: validate Helm charts and Kustomize bundles in this repo.
+
+default:
+  image: alpine/helm:3.14.4
+
+variables:
+  HELM_CACHE_HOME: "$CI_PROJECT_DIR/.helm-cache"
+
+test:
+  before_script:
+    - apk add --no-cache curl bash >/dev/null
+    - curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && chmod +x kubectl && mv kubectl /usr/local/bin/kubectl
+  script:
+    - set -e
+    - |
+      for chart in charts/*/; do
+        if [[ -f "${chart}Chart.yaml" ]]; then
+          echo "HELM lint: ${chart}"
+          helm lint "${chart}"
+        fi
+      done
+    - |
+      for kdir in environments/*/*/; do
+        if [[ -f "${kdir}kustomization.yaml" ]]; then
+          echo "KUSTOMIZE: ${kdir}"
+          kubectl kustomize "${kdir}" --enable-helm --load-restrictor LoadRestrictionsNone >/dev/null
+        fi
+      done
+  interruptible: true

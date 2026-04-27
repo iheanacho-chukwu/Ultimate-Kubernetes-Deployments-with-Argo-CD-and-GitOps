@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - namespace.yaml
+
+helmCharts:
+  - name: hello-world
+    releaseName: hello-world
+    repo: file://../../charts/hello-world
+    version: 0.1.0
+    namespace: hello-world-dev
+    valuesFile: values.yaml

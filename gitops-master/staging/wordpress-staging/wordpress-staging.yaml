@@ -1,0 +1,46 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: wordpress-helm-staging
+  namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: wordpress=eu.gcr.io/dcp-enterprise-optty/optty-wordpress
+    argocd-image-updater.argoproj.io/wordpress.helm.image-name: image.repository
+    argocd-image-updater.argoproj.io/wordpress.helm.image-tag: image.tag
+    argocd-image-updater.argoproj.io/wordpress.update-strategy: latest
+    argocd-image-updater.argoproj.io/wordpress.allow-tags: regexp:^[0-9a-zA-Z_-]+-rc-staging$
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/image-updater-ssh-git-creds
+spec:
+  project: default
+  source:
+    repoURL: git@gitlab.com:deimosdev/client-project/optty/infrastructure/gitops.git
+    path: charts/wordpress
+    targetRevision: HEAD
+    helm:
+      values: |
+        updateStrategy:
+          type: Recreate
+          rollingUpdate: null
+        image:
+          tag: b5c00ace-74b0d45-rc-staging
+        wordpressUrl: wordpress.staging.optty.com
+        serviceAccountName: svc-gke-optty-wp-woocommerce-staging
+        ingress:
+          hostname: wordpress.staging.optty.com
+          annotations:
+            external-dns.alpha.kubernetes.io/hostname: wordpress.staging.optty.com
+          extraTls:
+            - secretName: wordpress-staging-optty-com-tls
+              hosts:
+                - wordpress.staging.optty.com
+        persistentVolumeClaim: wp-woocommerce-staging
+        externalDatabase:
+          existingSecret: "wordpress-config"
+          existingConfigmap: "wordpress-config"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: wordpress-staging
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

@@ -1,0 +1,8 @@
+helm:
+  parameters:
+  - name: image.repository
+    value: eu.gcr.io/dcp-enterprise-optty/optty-wordpress
+    forcestring: true
+  - name: image.tag
+    value: f7154668-8485238-rc-staging
+    forcestring: true

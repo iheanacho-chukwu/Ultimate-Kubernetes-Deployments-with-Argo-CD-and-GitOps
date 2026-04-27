@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "web-beta.fullname" . }}-html
+  labels:
+    {{- include "web-beta.labels" . | nindent 4 }}
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="en">
+    <head><meta charset="utf-8"><title>{{ .Values.title }}</title></head>
+    <body style="font-family:sans-serif;margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:{{ .Values.backgroundColor }};">
+      <div style="text-align:center;">
+        <h1>{{ .Values.message }}</h1>
+        <p style="color:#444;">Chart: {{ .Chart.Name }} &bull; {{ .Values.replicaCount }} replica(s)</p>
+      </div>
+    </body>
+    </html>

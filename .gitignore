@@ -1,0 +1,53 @@
+# Book / sample content — always tracked (do not add rules that ignore these trees):
+#   ch03/
+#   ch04/
+#   gitops-example/
+# (This file only ignores OS/editor noise, local secrets, and a few artifact types.)
+
+# --- OS ---
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+
+# --- Editors / IDEs ---
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+*~
+\#*\#
+.\#*
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+.history/
+
+# --- Secrets & local env (never commit) ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*_rsa
+*_ed25519
+secrets.local.yaml
+
+# --- Helm (packaged subchart archives only; not your Chart.yaml / templates / values) ---
+**/charts/*.tgz
+
+# --- Build / tooling ---
+bin/
+pkg/
+*.pyc
+__pycache__/
+.project
+/.bin
+
+# --- Test / scratch ---
+/_test/secrets/*.json
+*.log
+*.tmp

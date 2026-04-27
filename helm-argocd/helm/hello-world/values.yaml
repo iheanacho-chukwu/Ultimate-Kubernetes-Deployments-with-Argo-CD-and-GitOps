@@ -1,0 +1,23 @@
+# Default values — overridden per environment via values-<env>.yaml
+replicaCount: 1
+
+image:
+  repository: nginx
+  tag: "1.27-alpine"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+# Text displayed on the index page — override per environment
+message: "Hello World"
+environment: base
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 32Mi
+  limits:
+    cpu: 100m
+    memory: 64Mi
